@@ -14,7 +14,7 @@ RecipesResponce _$RecipesResponceFromJson(Map<String, dynamic> json) =>
     );
 
 RecipeResp _$RecipeRespFromJson(Map<String, dynamic> json) => RecipeResp(
-      cookTimeMinutes: json['cookTimeMinutes'] as int?,
+      cookTimeMinutes: json['cook_time_minutes'] as int?,
       description: json['description'] as String?,
       thumbnailUrl: json['thumbnail_url'] as String?,
       name: json['name'] as String?,

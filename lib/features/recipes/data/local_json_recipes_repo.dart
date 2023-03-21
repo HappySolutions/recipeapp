@@ -12,10 +12,18 @@ class LocalJsonRecipesRepo implements RecipesRepo {
   @override
   Future<List<Recipe>> getRecipeList({String query = ''}) async {
     final items = RecipesResponce.fromJson(_json);
-    var test = Recipe();
     final recipes =
         items.results?.map((recipe) => Recipe.fromResponce(recipe)).toList();
     return recipes!;
+  }
+
+  @override
+  Future<Recipe> getRecipe(String id) async {
+    final items = RecipesResponce.fromJson(_json);
+    final recipes =
+        items.results?.map((recipe) => Recipe.fromResponce(recipe)).toList();
+    final recipe = recipes!.firstWhere((recipe) => recipe.id == id);
+    return recipe;
   }
 
   // @override
@@ -52,12 +60,6 @@ class LocalJsonRecipesRepo implements RecipesRepo {
   @override
   Future<List<Recipe>> getFavRecipeList() {
     // TODO: implement getFavRecipeList
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Recipe> getRecipe(String id) {
-    // TODO: implement getRecipe
     throw UnimplementedError();
   }
 

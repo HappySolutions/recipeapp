@@ -32,6 +32,31 @@ class _DetailsPageState extends State<DetailsPage> {
               thumbURL: widget.recipe.thumbnailUrl!,
             ),
           ),
+          const SizedBox(
+            height: 20,
+          ),
+          Center(
+              child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Description',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        widget.recipe.description!,
+                        style: const TextStyle(color: Colors.black),
+                      ),
+                    ],
+                  )))
         ],
       ),
     );
