@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:recipeapp/models/recipe.dart';
+import 'package:recipeapp/features/recipes/data/models/recipe.dart';
 
 // class RecipeApi {
 //   static Future<List<Recipe>> getRecipe() async {

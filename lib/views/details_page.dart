@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:recipeapp/models/recipe.dart';
+import 'package:recipeapp/features/recipes/data/models/recipe.dart';
 import 'package:recipeapp/views/widgets/recipe_card.dart';
+
+import '../features/recipes/data/models/recipe_responce.dart';
 
 class DetailsPage extends StatefulWidget {
   final Recipe recipe;
@@ -16,18 +18,18 @@ class _DetailsPageState extends State<DetailsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.recipe.name,
+          widget.recipe.name!,
         ),
       ),
       body: Column(
         children: [
           Hero(
-            tag: widget.recipe.name,
+            tag: widget.recipe.name!,
             child: RecipeCard(
-              title: widget.recipe.name,
-              cookTime: widget.recipe.totalTime,
-              rating: widget.recipe.rating.toString(),
-              thumbURL: widget.recipe.images,
+              title: widget.recipe.name!,
+              cookTime: (widget.recipe.cookTimeMinutes!).toString(),
+              rating: widget.recipe.cookTimeMinutes.toString(),
+              thumbURL: widget.recipe.thumbnailUrl!,
             ),
           ),
         ],

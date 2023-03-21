@@ -1,12 +1,28 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:recipeapp/features/recipes/data/repos/recipes_repo.dart';
 import 'package:recipeapp/views/home.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'features/recipes/data/local_json_recipes_repo.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // final recipesRepo = InMemoryRecipesRepo();
+  final recipesJson = json.decode(
+    await rootBundle.loadString('assets/data/recipes.json'),
+  );
+
+  final localJsonRecipesRepo = LocalJsonRecipesRepo(recipesJson);
+  runApp(MyApp(
+      // recipesRepo: recipesRepo,
+      recipesRepo: localJsonRecipesRepo));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final RecipesRepo recipesRepo;
+  const MyApp({super.key, required this.recipesRepo});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +38,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const HomePage(),
+      home: HomePage(recipesRepo: recipesRepo),
     );
   }
 }
