@@ -2,8 +2,8 @@ import 'package:http/http.dart' as http;
 import 'package:recipeapp/features/recipes/data/repos/recipes_repo.dart';
 import 'dart:convert';
 
-import 'models/recipe.dart';
-import 'models/recipe_responce.dart';
+import '../models/recipe.dart';
+import '../models/recipe_responce.dart';
 
 class LocalJsonRecipesRepo implements RecipesRepo {
   final Map<String, dynamic> _json;

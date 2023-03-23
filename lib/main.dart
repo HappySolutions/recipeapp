@@ -1,12 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:recipeapp/features/recipes/data/network_recipes_repo.dart';
+import 'package:recipeapp/features/recipes/data/repos/network_recipes_repo.dart';
 import 'package:recipeapp/features/recipes/data/repos/recipes_repo.dart';
-import 'package:recipeapp/views/home.dart';
-
-import 'features/recipes/data/local_json_recipes_repo.dart';
+import 'package:recipeapp/features/recipes/presentation/screens/home.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:recipeapp/features/recipes/data/models/recipe.dart';
 import 'package:recipeapp/features/recipes/data/repos/recipes_repo.dart';
 
-import 'models/recipe_responce.dart';
+import '../models/recipe_responce.dart';
 
 class NetworkRecipesRepo implements RecipesRepo {
   final _dio = Dio(

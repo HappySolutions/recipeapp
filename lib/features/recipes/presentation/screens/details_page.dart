@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:recipeapp/features/recipes/data/models/recipe.dart';
-import 'package:recipeapp/views/widgets/recipe_card.dart';
+import 'package:recipeapp/features/recipes/presentation/widgets/recipe_card.dart';
 
-import '../features/recipes/data/models/recipe_responce.dart';
+import '../../data/models/recipe_responce.dart';
 
 class DetailsPage extends StatefulWidget {
   final Recipe recipe;
