@@ -36,28 +36,34 @@ class _DetailsPageState extends State<DetailsPage> {
             height: 20,
           ),
           Center(
-              child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Description',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        widget.recipe.description!,
-                        style: const TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  )))
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Description',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    widget.recipe.description!,
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
       ),
     );
   }

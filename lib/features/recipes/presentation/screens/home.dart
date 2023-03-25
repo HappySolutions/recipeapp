@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipeapp/features/recipes/data/models/recipe.dart';
 import 'package:recipeapp/features/recipes/data/repos/recipes_repo.dart';
 import 'package:recipeapp/features/recipes/presentation/screens/details_page.dart';
+import 'package:recipeapp/features/recipes/presentation/screens/favorites_page.dart';
 import 'package:recipeapp/features/recipes/presentation/widgets/recipe_card.dart';
 
 import '../../data/models/recipe_responce.dart';
@@ -18,6 +19,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Future<List<Recipe>>? recipelist;
   var _query = '';
+  int currentIndex = 0;
+  // final _buidBody = const <Widget> [HomePage(recipesRepo: recipesRepo), FavoritePage()]
+  void _onItemTapped(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -127,6 +136,14 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+          onTap: _onItemTapped,
+          type: BottomNavigationBarType.fixed,
+          currentIndex: currentIndex,
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.menu), label: 'Recent'),
+            BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Favaorites'),
+          ]),
     );
   }
 }
