@@ -57,7 +57,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             fontStyle: FontStyle.italic,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
@@ -69,7 +69,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Text(
@@ -79,7 +79,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         const Text(
@@ -89,7 +89,7 @@ class _DetailsPageState extends State<DetailsPage> {
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
@@ -108,16 +108,22 @@ class _DetailsPageState extends State<DetailsPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          final favRecipe = Recipe(
-              name: widget.recipe.name,
-              description: widget.recipe.description,
-              thumbnailUrl: widget.recipe.thumbnailUrl,
-              cookTimeMinutes: widget.recipe.cookTimeMinutes);
-          createRecipeEntry(favRecipe);
-          setState(() => isPressed = !isPressed);
+          if (!isPressed) {
+            final favRecipe = Recipe(
+                name: widget.recipe.name,
+                description: widget.recipe.description,
+                thumbnailUrl: widget.recipe.thumbnailUrl,
+                cookTimeMinutes: widget.recipe.cookTimeMinutes);
+            createRecipeEntry(favRecipe);
+            setState(() => isPressed = !isPressed);
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text("Recipe is added to the favorites"),
+            ));
+            isPressed = true;
+          }
         },
-        child: const Icon(Icons.favorite_sharp),
         backgroundColor: isPressed ? Colors.red : Colors.blue,
+        child: const Icon(Icons.favorite_sharp),
       ),
     );
   }
