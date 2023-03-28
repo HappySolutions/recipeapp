@@ -1,10 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class BaseAlertDialog extends StatelessWidget {
-  //When creating please recheck 'context' if there is an error!
-
-  Color _color = Color.fromARGB(220, 117, 218, 255);
-
   String? _title;
   String? _content;
   String? _yes;
@@ -29,25 +27,27 @@ class BaseAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(_title!),
-      content: Text(_content!),
-      backgroundColor: _color,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      actions: <Widget>[
-        ElevatedButton(
-          child: Text(_yes!),
-          onPressed: () {
-            _yesOnPressed!();
-          },
-        ),
-        ElevatedButton(
-          child: Text(_no!),
-          onPressed: () {
-            _noOnPressed!();
-          },
-        ),
-      ],
+    return BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+      child: AlertDialog(
+        title: Text(_title!),
+        content: Text(_content!),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        actions: <Widget>[
+          ElevatedButton(
+            child: Text(_yes!),
+            onPressed: () {
+              _yesOnPressed!();
+            },
+          ),
+          ElevatedButton(
+            child: Text(_no!),
+            onPressed: () {
+              _noOnPressed!();
+            },
+          ),
+        ],
+      ),
     );
   }
 }
