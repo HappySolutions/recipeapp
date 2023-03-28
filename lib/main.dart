@@ -3,12 +3,11 @@ import 'package:recipeapp/features/recipes/data/repos/network_recipes_repo.dart'
 import 'package:recipeapp/features/recipes/data/repos/recipes_repo.dart';
 import 'package:recipeapp/features/recipes/presentation/screens/home.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // final recipesRepo = InMemoryRecipesRepo();
+  //  final recipesRepo = InMemoryRecipesRepo();
   // final recipesJson = json.decode(
   //   await rootBundle.loadString('assets/data/recipes.json'),
   // );
@@ -35,7 +34,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         primaryColor: Colors.white,
         textTheme: const TextTheme(
-          bodyText2: TextStyle(
+          bodyMedium: TextStyle(
             color: Colors.white,
           ),
         ),

@@ -14,14 +14,15 @@ class Recipe {
   String? thumbnailUrl;
   String? name;
   int? id;
+  String? fId;
 
-  Recipe({
-    this.cookTimeMinutes,
-    this.description,
-    this.thumbnailUrl,
-    this.name,
-    this.id,
-  });
+  Recipe(
+      {this.cookTimeMinutes,
+      this.description,
+      this.thumbnailUrl,
+      this.name,
+      this.id,
+      this.fId = ''});
 
   factory Recipe.fromResponce(RecipeResp responce) {
     final id = responce.id;
@@ -37,23 +38,20 @@ class Recipe {
         description: description ?? '',
         thumbnailUrl: thumbnailUrl ?? '');
   }
-  // factory Recipe.fromJson(dynamic json) {
-  //   return Recipe(
-  //       json['name'] as String,
-  //       json['images'][0]['hostedLargeUrl'] as String,
-  //       json['rating'] as double,
-  //       json['totalTime'] as String);
-  // }
 
-  // static List<Recipe> recipesFromSnapshot(List snapshot) {
-  //   return snapshot.map((data) {
-  //     return Recipe.fromJson(data);
-  //   }).toList();
-  // }
+  Map<String, dynamic> toJson() => {
+        'id': fId,
+        'name': name,
+        'description': description,
+        'thumbnailUrl': thumbnailUrl,
+        'cookTimeMinutes': cookTimeMinutes
+      };
 
-  // @override
-  // String toString() {
-  //   return 'Recipe {name: $name, image: $images, rating: $rating, totalTime: $totalTime}';
-  // }
-
+  static Recipe fromJson(Map<String, dynamic> json) => Recipe(
+        fId: json['id'],
+        name: json['name'],
+        description: json['description'],
+        thumbnailUrl: json['thumbnailUrl'],
+        cookTimeMinutes: json['cookTimeMinutes'],
+      );
 }

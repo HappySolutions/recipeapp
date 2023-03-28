@@ -58,57 +58,29 @@ class RecipeCard extends StatelessWidget {
             ),
             alignment: Alignment.center,
           ),
-          Align(
-            // ignore: sort_child_properties_last
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Container(
-                //   padding: const EdgeInsets.all(5),
-                //   margin: const EdgeInsets.all(10),
-                //   decoration: BoxDecoration(
-                //     color: Colors.black.withOpacity(0.4),
-                //     borderRadius: BorderRadius.circular(15),
-                //   ),
-                //   child: Row(
-                //     children: [
-                //       const Icon(
-                //         Icons.star,
-                //         color: Colors.yellow,
-                //         size: 18,
-                //       ),
-                //       const SizedBox(
-                //         width: 18,
-                //       ),
-                //       Text(rating),
-                //     ],
-                //   ),
-                // ),
-                Container(
-                  padding: const EdgeInsets.all(5),
-                  margin: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.schedule,
-                        color: Colors.yellow,
-                        size: 18,
-                      ),
-                      const SizedBox(
-                        width: 7,
-                      ),
-                      Text(cookTime),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            alignment: Alignment.bottomLeft,
-          ),
+          // Align(
+          //   // ignore: sort_child_properties_last
+          //   child: Container(
+          //     decoration: BoxDecoration(
+          //       color: Colors.black.withOpacity(0.4),
+          //       borderRadius: BorderRadius.circular(15),
+          //     ),
+          //     child: Row(
+          //       children: [
+          //         const Icon(
+          //           Icons.schedule,
+          //           color: Colors.yellow,
+          //           size: 18,
+          //         ),
+          //         const SizedBox(
+          //           width: 7,
+          //         ),
+          //         Text(cookTime),
+          //       ],
+          //     ),
+          //   ),
+          //   alignment: Alignment.bottomLeft,
+          // ),
         ],
       ),
     );

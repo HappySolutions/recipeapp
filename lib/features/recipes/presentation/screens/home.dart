@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:recipeapp/features/recipes/data/models/recipe.dart';
 import 'package:recipeapp/features/recipes/data/repos/recipes_repo.dart';
 import 'package:recipeapp/features/recipes/presentation/screens/details_page.dart';
-import 'package:recipeapp/features/recipes/presentation/screens/favorites_page.dart';
 import 'package:recipeapp/features/recipes/presentation/widgets/recipe_card.dart';
 
-import '../../data/models/recipe_responce.dart';
+import '../widgets/navbar.dart';
 
 class HomePage extends StatefulWidget {
   final RecipesRepo recipesRepo;
@@ -18,14 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Future<List<Recipe>>? recipelist;
-  var _query = '';
-  int currentIndex = 0;
-  // final _buidBody = const <Widget> [HomePage(recipesRepo: recipesRepo), FavoritePage()]
-  void _onItemTapped(int index) {
-    setState(() {
-      currentIndex = index;
-    });
-  }
+  final _query = '';
 
   @override
   void initState() {
@@ -36,26 +28,47 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Icon(Icons.restaurant_menu),
-            SizedBox(
-              width: 10,
-            ),
-            Text('Food Recipes'),
-          ],
-        ),
-      ),
+      drawer: NavBar(),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
+            SliverAppBar(
+              leading: Builder(
+                builder: (BuildContext context) {
+                  return IconButton(
+                    icon: const Icon(
+                      Icons.menu_book,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                    tooltip:
+                        MaterialLocalizations.of(context).openAppDrawerTooltip,
+                  );
+                },
+              ),
+              pinned: true,
+              expandedHeight: 200.0,
+              backgroundColor: Colors.white,
+              flexibleSpace: FlexibleSpaceBar(
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text('Food Recipes'),
+                  ],
+                ),
+                background: Image.network(
+                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuQYeqJDIUQlJk5ZZOquYjdJrxBUa_BhJfQQ&usqp=CAU',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
             const SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.all(16),
                 child: Text(
-                  'Recipes List',
+                  'Recent Recipes',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -71,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                   return const SliverFillRemaining(
                     child: Center(
                       child: Text(
-                        'Something wen wrong',
+                        'Something went wrong',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -104,7 +117,9 @@ class _HomePageState extends State<HomePage> {
                   );
                 }
 
-                return SliverList(
+                return SliverGrid(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
                       final recipe = recipes[index];
@@ -117,14 +132,11 @@ class _HomePageState extends State<HomePage> {
                             ),
                           );
                         },
-                        child: Hero(
-                          tag: recipe.name!,
-                          child: RecipeCard(
-                            title: recipe.name!,
-                            rating: (recipe.cookTimeMinutes).toString(),
-                            cookTime: (recipe.cookTimeMinutes!).toString(),
-                            thumbURL: recipe.thumbnailUrl!,
-                          ),
+                        child: RecipeCard(
+                          title: recipe.name!,
+                          rating: (recipe.cookTimeMinutes).toString(),
+                          cookTime: (recipe.cookTimeMinutes!).toString(),
+                          thumbURL: recipe.thumbnailUrl!,
                         ),
                       );
                     },
@@ -136,50 +148,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          onTap: _onItemTapped,
-          type: BottomNavigationBarType.fixed,
-          currentIndex: currentIndex,
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.menu), label: 'Recent'),
-            BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Favaorites'),
-          ]),
     );
   }
 }
-
-// GridView.builder(
-//               shrinkWrap: true,
-//               physics: const NeverScrollableScrollPhysics(),
-//               itemCount: recipelist.length,
-//               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-//                 crossAxisCount: 1,
-//               ),
-//               itemBuilder: (BuildContext context, index) {
-//                 return InkWell(
-//                   onTap: () {
-//                     Navigator.push(
-//                       context,
-//                       MaterialPageRoute(
-//                         builder: (context) => DetailsPage(
-//                           recipe: recipelist[index],
-//                         ),
-//                       ),
-//                     );
-//                   },
-//                   child: Hero(
-//                     tag: recipelist[index].name, //London
-//                     child: RecipeCard(
-//                       title: recipelist[index].name,
-//                       cookTime: recipelist[index].totalTime,
-//                       rating: recipelist[index].rating.toString(),
-//                       thumbURL: recipelist[index].images,
-//                     ),
-//                   ),
-//                 );
-//               },
-//             ),
-          
-
-
-
