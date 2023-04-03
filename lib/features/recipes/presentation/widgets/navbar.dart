@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:recipeapp/features/recipes/presentation/screens/favorites_page.dart';
 
+import '../../data/repos/firebase_recipes_repo.dart';
+import '../../data/repos/recipes_repo.dart';
+
 class NavBar extends StatelessWidget {
+  final RecipesRepo recipesRepo = FirebaseRecipesRepo();
+
+  NavBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -38,7 +45,9 @@ class NavBar extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const FavoritePage(),
+                  builder: (context) => FavoritePage(
+                    recipesRepo: recipesRepo,
+                  ),
                 ),
               );
             },

@@ -7,4 +7,6 @@ abstract class RecipesRepo {
   Future<void> addRecipeToFav(Recipe recipe);
   Future<void> removeRecipeFromFav(String recipeId);
   Future<List<Recipe>> getFavRecipeList();
+  Stream<List<Recipe>> readRecipesEntries();
+  Future<void> deleteRecipe(String recId);
 }

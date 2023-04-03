@@ -48,4 +48,16 @@ class NetworkRecipesRepo implements RecipesRepo {
     // TODO: implement removeRecipeFromFav
     throw UnimplementedError();
   }
+
+  @override
+  Stream<List<Recipe>> readRecipesEntries() {
+    // TODO: implement readRecipesEntries
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteRecipe(String recId) {
+    // TODO: implement deleteRecipe
+    throw UnimplementedError();
+  }
 }
