@@ -1,31 +1,26 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../data/models/recipe.dart';
+import '../../data/repos/recipes_repo.dart';
 import '../widgets/alert_dialog.dart';
 import '../widgets/recipe_card.dart';
 import 'details_page.dart';
 
 class FavoritePage extends StatefulWidget {
-  const FavoritePage({super.key});
+  final RecipesRepo recipesRepo;
+
+  const FavoritePage({super.key, required this.recipesRepo});
 
   @override
   State<FavoritePage> createState() => _FavoritePageState();
 }
 
 class _FavoritePageState extends State<FavoritePage> {
-  Stream<List<Recipe>> readRecipesEntries() => FirebaseFirestore.instance
-      .collection('recipeentries')
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => Recipe.fromJson(doc.data())).toList());
+  Stream<List<Recipe>>? favRecipeslist;
 
-  Future<void> deleteRecipe(String recId) {
-    return FirebaseFirestore.instance
-        .collection('recipeentries')
-        .doc(recId)
-        .delete();
+  @override
+  void initState() {
+    super.initState();
+    favRecipeslist = widget.recipesRepo.readRecipesEntries();
   }
 
   @override
@@ -54,7 +49,7 @@ class _FavoritePageState extends State<FavoritePage> {
               ),
             ),
             StreamBuilder<List<Recipe>>(
-              stream: readRecipesEntries(),
+              stream: favRecipeslist,
               builder: ((context, snapshot) {
                 if (snapshot.hasError) {
                   return const SliverFillRemaining(
@@ -94,7 +89,7 @@ class _FavoritePageState extends State<FavoritePage> {
                 }
 
                 return SliverGrid(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
@@ -106,7 +101,8 @@ class _FavoritePageState extends State<FavoritePage> {
                               content:
                                   "Are you sure you want to delete the Recipe?",
                               yesOnPressed: () {
-                                deleteRecipe(recipe.fId!);
+                                widget.recipesRepo
+                                    .removeRecipeFromFav(recipe.fId!);
                                 Navigator.of(context, rootNavigator: true)
                                     .pop(true);
                               },
